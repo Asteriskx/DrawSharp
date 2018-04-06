@@ -7,14 +7,47 @@ using DrawSharp.Core.Enum;
 
 namespace DrawSharp
 {
+	/// <summary>
+	/// お絵描きアプリ：メインクラス
+	/// </summary>
 	public partial class DrawSharp : Form
 	{
-		private DrawTypes _CurrentTool = DrawTypes.Pencil;
-		private Color _CurrentColor { get; set; } = Color.Black;
-		private Point _Position { get; set; }
-		private Point _PrevPosition { get; set; }
-		private float _SelectStroke { get; set; }
+
+		#region Properties
+
+		/// <summary>
+		/// 描画する線・図形の太さ
+		/// </summary>
 		private PencilStrokes _CurrentStrokes { get; set; } = new PencilStrokes();
+
+		/// <summary>
+		/// 描画する線・図形の色
+		/// </summary>
+		private Color _CurrentColor { get; set; } = Color.Black;
+
+		/// <summary>
+		/// 描画する線・図形の現在位置
+		/// </summary>
+		private Point _Position { get; set; }
+
+		/// <summary>
+		/// 描画する線・図形の前回位置
+		/// </summary>
+		private Point _PrevPosition { get; set; }
+
+		/// <summary>
+		/// 現時点での描画する線・図形
+		/// </summary>
+		private DrawTypes _CurrentTool = DrawTypes.Pencil;
+
+		/// <summary>
+		/// 描画する線・図形の太さを選択します。
+		/// </summary>
+		private float _SelectStroke { get; set; }
+
+		#endregion
+
+		#region Constractor
 
 		public DrawSharp()
 		{
@@ -24,27 +57,41 @@ namespace DrawSharp
 			this._Settings();
 		}
 
+		#endregion
+
+		#region Setting Method's
+
 		private void DrawSharp_Load()
 		{
 		}
 
+		/// <summary>
+		/// セットアップ
+		/// </summary>
 		private void _Settings()
 		{
-			newSave.Click += (s, e) => {
+			// 画像の保存
+			newSave.Click += (s, e) =>
+			{
 				using (var dlalog = new SaveFileDialog())
 				{
+					// .jpg
 					dlalog.Filter = "jpg files (*.jpg)|*.jpg";
 					if (DialogResult.OK == dlalog.ShowDialog())
 						drawArea.BackgroundImage.Save(dlalog.FileName);
 				}
 			};
 
-			closeApp.Click += (s, e) => {
+			// アプリの終了
+			closeApp.Click += (s, e) =>
+			{
 				this.Dispose();
 				this.Close();
 			};
 
-			colorInfo.Click += (s, e) => {
+			// 色指定
+			colorInfo.Click += (s, e) =>
+			{
 				using (var dlalog = new ColorDialog())
 				{
 					if (DialogResult.OK == dlalog.ShowDialog())
@@ -52,37 +99,50 @@ namespace DrawSharp
 				}
 			};
 
-			pencil.Click += (s, e) => {
+			// 描画ツール指定：ペンモード
+			pencil.Click += (s, e) =>
+			{
 				_CurrentTool = DrawTypes.Pencil;
 				status.Text = $"{_CurrentTool} を描画ツールとして設定しました。";
 			};
 
-			eraser.Click += (s, e) => {
+			// 描画ツール指定：消しゴムモード
+			eraser.Click += (s, e) =>
+			{
 				_CurrentTool = DrawTypes.Eraser;
 				status.Text = $"{_CurrentTool} を描画ツールとして設定しました。";
 			};
 
-			fill.Click += (s, e) => {
+			// 描画ツール指定：塗りつぶしモード
+			fill.Click += (s, e) =>
+			{
 				_CurrentTool = DrawTypes.Fill;
 				status.Text = $"{_CurrentTool} を描画ツールとして設定しました。";
 			};
 
-			circle.Click += (s, e) => {
+			// 描画ツール指定：楕円モード
+			circle.Click += (s, e) =>
+			{
 				_CurrentTool = DrawTypes.Circle;
 				status.Text = $"{_CurrentTool} を描画ツールとして設定しました。";
 			};
 
-			rect.Click += (s, e) => {
+			// 描画ツール指定：四角形モード
+			rect.Click += (s, e) =>
+			{
 				_CurrentTool = DrawTypes.Rect;
 				status.Text = $"{_CurrentTool} を描画ツールとして設定しました。";
 			};
 
-			none.Click += (s, e) => {
+			// 描画ツール指定：なし
+			none.Click += (s, e) =>
+			{
 				_CurrentTool = DrawTypes.None;
 				status.Text = $"{_CurrentTool} を描画ツールとして設定しました。";
 			};
 
-			L1.Click += (s, e) => 
+			// 描画する線・図形：線の太さを指定
+			L1.Click += (s, e) =>
 				_SelectStroke = new PencilStrokes("L1").ReturnPencilStroke();
 			L2.Click += (s, e) =>
 				_SelectStroke = new PencilStrokes("L2").ReturnPencilStroke();
@@ -96,7 +156,8 @@ namespace DrawSharp
 				_SelectStroke = new PencilStrokes("L6").ReturnPencilStroke();
 
 			// 全消し
-			allErase.Click += (s, e) => {
+			allErase.Click += (s, e) =>
+			{
 				using (var back = Graphics.FromImage(drawArea.BackgroundImage))
 				{
 					var front = drawArea.CreateGraphics();
@@ -105,6 +166,8 @@ namespace DrawSharp
 				}
 			};
 		}
+
+		#endregion
 
 		#region Event for drawArea
 
@@ -187,13 +250,18 @@ namespace DrawSharp
 
 		#endregion
 
+		#region based Material.
+
 		///<summary>
 		/// 長方形を作成します。
 		///</summary>
 		private Rectangle _GenerateRectangle(Point p1, Point p2)
 		{
-			return new Rectangle(Math.Min(p1.X, p2.X), 
+			return new Rectangle(Math.Min(p1.X, p2.X),
 				Math.Min(p1.Y, p2.Y), Math.Abs(p1.X - p2.X), Math.Abs(p1.Y - p2.Y));
 		}
+
+		#endregion
+
 	}
 }

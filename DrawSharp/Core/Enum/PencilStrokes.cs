@@ -1,7 +1,13 @@
 ﻿namespace DrawSharp.Core.Enum
 {
+	/// <summary>
+	/// 描画する線・図形：線の太さの定義クラス
+	/// </summary>
 	public class PencilStrokes
 	{
+
+		#region Const Valiable
+
 		public const float Default = 5.0F;
 		public const float S1 = 8.0F;
 		public const float S2 = 12.0F;
@@ -10,10 +16,30 @@
 		public const float S5 = 16.0F;
 		public const float S6 = 18.0F;
 
+		#endregion
+
+		#region Property
+
+		/// <summary>
+		/// 線の太さを選択します。
+		/// </summary>
 		public string SelectStroke { get; set; }
+
+		#endregion
+
+		#region Constractor
+
 		public PencilStrokes() => this.SelectStroke = "default";
 		public PencilStrokes(string selectStroke) => this.SelectStroke = selectStroke;
 
+		#endregion
+
+		#region Method
+
+		/// <summary>
+		/// 線・図形の太さプロパティを返却します。
+		/// </summary>
+		/// <returns></returns>
 		public float ReturnPencilStroke()
 		{
 			switch (SelectStroke)
@@ -27,5 +53,8 @@
 				default: return Default;
 			}
 		}
+
+		#endregion
+
 	}
 }

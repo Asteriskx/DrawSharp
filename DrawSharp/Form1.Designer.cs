@@ -61,8 +61,8 @@
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileInfo,
-            this.tools});
+			this.fileInfo,
+			this.tools});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(484, 24);
@@ -72,8 +72,8 @@
 			// fileInfo
 			// 
 			this.fileInfo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newSave,
-            this.closeApp});
+			this.newSave,
+			this.closeApp});
 			this.fileInfo.Name = "fileInfo";
 			this.fileInfo.Size = new System.Drawing.Size(67, 20);
 			this.fileInfo.Text = "ファイル(&F)";
@@ -93,10 +93,10 @@
 			// tools
 			// 
 			this.tools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.drawInfo,
-            this.colorInfo,
-            this.Stroke,
-            this.allErase});
+			this.drawInfo,
+			this.colorInfo,
+			this.Stroke,
+			this.allErase});
 			this.tools.Name = "tools";
 			this.tools.Size = new System.Drawing.Size(60, 20);
 			this.tools.Text = "ツール(&T)";
@@ -104,12 +104,12 @@
 			// drawInfo
 			// 
 			this.drawInfo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pencil,
-            this.eraser,
-            this.fill,
-            this.circle,
-            this.rect,
-            this.none});
+			this.pencil,
+			this.eraser,
+			this.fill,
+			this.circle,
+			this.rect,
+			this.none});
 			this.drawInfo.Name = "drawInfo";
 			this.drawInfo.Size = new System.Drawing.Size(152, 22);
 			this.drawInfo.Text = "描画線(&D)";
@@ -153,13 +153,13 @@
 			// Stroke
 			// 
 			this.Stroke.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Default,
-            this.L1,
-            this.L2,
-            this.L3,
-            this.L4,
-            this.L5,
-            this.L6});
+			this.Default,
+			this.L1,
+			this.L2,
+			this.L3,
+			this.L4,
+			this.L5,
+			this.L6});
 			this.Stroke.Name = "Stroke";
 			this.Stroke.Size = new System.Drawing.Size(152, 22);
 			this.Stroke.Text = "太さ(&S)";
@@ -228,7 +228,7 @@
 			// 
 			this.statusStrip1.BackColor = System.Drawing.Color.LightSeaGreen;
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.status});
+			this.status});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 458);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.Size = new System.Drawing.Size(484, 22);
