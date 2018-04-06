@@ -6,6 +6,7 @@
 		Eraser,
 		Fill,
 		Rect,
+		Circle,
 		None
 	}
 }

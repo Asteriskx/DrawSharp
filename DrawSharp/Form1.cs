@@ -67,6 +67,11 @@ namespace DrawSharp
 				status.Text = $"{_CurrentTool} を描画ツールとして設定しました。";
 			};
 
+			circle.Click += (s, e) => {
+				_CurrentTool = DrawTypes.Circle;
+				status.Text = $"{_CurrentTool} を描画ツールとして設定しました。";
+			};
+
 			rect.Click += (s, e) => {
 				_CurrentTool = DrawTypes.Rect;
 				status.Text = $"{_CurrentTool} を描画ツールとして設定しました。";
@@ -101,7 +106,7 @@ namespace DrawSharp
 			};
 		}
 
-		#region 描画領域でのイベント
+		#region Event for drawArea
 
 		private void drawArea_MouseDown(object sender, MouseEventArgs e)
 		{
@@ -119,6 +124,11 @@ namespace DrawSharp
 					case DrawTypes.Fill:
 						back.FillRectangle(new SolidBrush(_CurrentColor), rect);
 						break;
+
+					case DrawTypes.Circle:
+						back.DrawEllipse(new Pen(_CurrentColor, _SelectStroke), rect);
+						break;
+
 					case DrawTypes.Rect:
 						back.DrawRectangle(new Pen(_CurrentColor), rect);
 						break;
@@ -146,17 +156,28 @@ namespace DrawSharp
 						back.DrawLine(new Pen(_CurrentColor, _SelectStroke), _PrevPosition, e.Location);
 						front.DrawLine(new Pen(_CurrentColor, _SelectStroke), _PrevPosition, e.Location);
 						break;
+
 					case DrawTypes.Eraser:
 						back.DrawLine(new Pen(Color.White, _SelectStroke), _PrevPosition, e.Location);
 						front.DrawLine(new Pen(Color.Pink, _SelectStroke), _PrevPosition, e.Location);
 						break;
+
 					case DrawTypes.Fill:
 						front.FillRectangle(Brushes.White, prevRect);
 						front.FillRectangle(Brushes.Pink, rect);
 						break;
+
+					case DrawTypes.Circle:
+						front.DrawRectangle(Pens.White, prevRect);
+						//front.DrawEllipse(new Pen(_CurrentColor, _SelectStroke), rect);
+						break;
+
 					case DrawTypes.Rect:
 						front.DrawRectangle(Pens.White, prevRect);
 						front.DrawRectangle(Pens.Pink, rect);
+						break;
+
+					case DrawTypes.None:
 						break;
 				}
 			}
@@ -174,6 +195,5 @@ namespace DrawSharp
 			return new Rectangle(Math.Min(p1.X, p2.X), 
 				Math.Min(p1.Y, p2.Y), Math.Abs(p1.X - p2.X), Math.Abs(p1.Y - p2.Y));
 		}
-
 	}
 }

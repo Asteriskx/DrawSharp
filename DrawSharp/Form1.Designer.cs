@@ -52,6 +52,7 @@
 			this.drawArea = new System.Windows.Forms.PictureBox();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.status = new System.Windows.Forms.ToolStripStatusLabel();
+			this.circle = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.drawArea)).BeginInit();
 			this.statusStrip1.SuspendLayout();
@@ -106,46 +107,47 @@
             this.pencil,
             this.eraser,
             this.fill,
+            this.circle,
             this.rect,
             this.none});
 			this.drawInfo.Name = "drawInfo";
-			this.drawInfo.Size = new System.Drawing.Size(126, 22);
+			this.drawInfo.Size = new System.Drawing.Size(152, 22);
 			this.drawInfo.Text = "描画線(&D)";
 			// 
 			// pencil
 			// 
 			this.pencil.Name = "pencil";
-			this.pencil.Size = new System.Drawing.Size(121, 22);
+			this.pencil.Size = new System.Drawing.Size(152, 22);
 			this.pencil.Text = "ペン";
 			// 
 			// eraser
 			// 
 			this.eraser.Name = "eraser";
-			this.eraser.Size = new System.Drawing.Size(121, 22);
+			this.eraser.Size = new System.Drawing.Size(152, 22);
 			this.eraser.Text = "消しゴム";
 			// 
 			// fill
 			// 
 			this.fill.Name = "fill";
-			this.fill.Size = new System.Drawing.Size(121, 22);
+			this.fill.Size = new System.Drawing.Size(152, 22);
 			this.fill.Text = "塗りつぶし";
 			// 
 			// rect
 			// 
 			this.rect.Name = "rect";
-			this.rect.Size = new System.Drawing.Size(121, 22);
+			this.rect.Size = new System.Drawing.Size(152, 22);
 			this.rect.Text = "四角形";
 			// 
 			// none
 			// 
 			this.none.Name = "none";
-			this.none.Size = new System.Drawing.Size(121, 22);
+			this.none.Size = new System.Drawing.Size(152, 22);
 			this.none.Text = "なし";
 			// 
 			// colorInfo
 			// 
 			this.colorInfo.Name = "colorInfo";
-			this.colorInfo.Size = new System.Drawing.Size(126, 22);
+			this.colorInfo.Size = new System.Drawing.Size(152, 22);
 			this.colorInfo.Text = "色(&C)";
 			// 
 			// Stroke
@@ -159,7 +161,7 @@
             this.L5,
             this.L6});
 			this.Stroke.Name = "Stroke";
-			this.Stroke.Size = new System.Drawing.Size(126, 22);
+			this.Stroke.Size = new System.Drawing.Size(152, 22);
 			this.Stroke.Text = "太さ(&S)";
 			// 
 			// Default
@@ -207,7 +209,7 @@
 			// allErase
 			// 
 			this.allErase.Name = "allErase";
-			this.allErase.Size = new System.Drawing.Size(126, 22);
+			this.allErase.Size = new System.Drawing.Size(152, 22);
 			this.allErase.Text = "全消し(&A)";
 			// 
 			// drawArea
@@ -240,6 +242,12 @@
 			this.status.Name = "status";
 			this.status.Size = new System.Drawing.Size(55, 17);
 			this.status.Text = "準備完了";
+			// 
+			// circle
+			// 
+			this.circle.Name = "circle";
+			this.circle.Size = new System.Drawing.Size(152, 22);
+			this.circle.Text = "円";
 			// 
 			// DrawSharp
 			// 
@@ -289,6 +297,7 @@
 		private System.Windows.Forms.ToolStripMenuItem L4;
 		private System.Windows.Forms.ToolStripMenuItem L5;
 		private System.Windows.Forms.ToolStripMenuItem L6;
+		private System.Windows.Forms.ToolStripMenuItem circle;
 	}
 }
 
