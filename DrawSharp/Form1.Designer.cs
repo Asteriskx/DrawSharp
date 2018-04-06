@@ -109,7 +109,7 @@
             this.rect,
             this.none});
 			this.drawInfo.Name = "drawInfo";
-			this.drawInfo.Size = new System.Drawing.Size(152, 22);
+			this.drawInfo.Size = new System.Drawing.Size(126, 22);
 			this.drawInfo.Text = "描画線(&D)";
 			// 
 			// pencil
@@ -145,7 +145,7 @@
 			// colorInfo
 			// 
 			this.colorInfo.Name = "colorInfo";
-			this.colorInfo.Size = new System.Drawing.Size(152, 22);
+			this.colorInfo.Size = new System.Drawing.Size(126, 22);
 			this.colorInfo.Text = "色(&C)";
 			// 
 			// Stroke
@@ -159,63 +159,63 @@
             this.L5,
             this.L6});
 			this.Stroke.Name = "Stroke";
-			this.Stroke.Size = new System.Drawing.Size(152, 22);
+			this.Stroke.Size = new System.Drawing.Size(126, 22);
 			this.Stroke.Text = "太さ(&S)";
 			// 
 			// Default
 			// 
 			this.Default.Name = "Default";
-			this.Default.Size = new System.Drawing.Size(152, 22);
+			this.Default.Size = new System.Drawing.Size(111, 22);
 			this.Default.Text = "default";
 			// 
 			// L1
 			// 
 			this.L1.Name = "L1";
-			this.L1.Size = new System.Drawing.Size(152, 22);
+			this.L1.Size = new System.Drawing.Size(111, 22);
 			this.L1.Text = "レベル1";
 			// 
 			// L2
 			// 
 			this.L2.Name = "L2";
-			this.L2.Size = new System.Drawing.Size(152, 22);
+			this.L2.Size = new System.Drawing.Size(111, 22);
 			this.L2.Text = "レベル2";
 			// 
 			// L3
 			// 
 			this.L3.Name = "L3";
-			this.L3.Size = new System.Drawing.Size(152, 22);
+			this.L3.Size = new System.Drawing.Size(111, 22);
 			this.L3.Text = "レベル3";
 			// 
 			// L4
 			// 
 			this.L4.Name = "L4";
-			this.L4.Size = new System.Drawing.Size(152, 22);
+			this.L4.Size = new System.Drawing.Size(111, 22);
 			this.L4.Text = "レベル4";
 			// 
 			// L5
 			// 
 			this.L5.Name = "L5";
-			this.L5.Size = new System.Drawing.Size(152, 22);
+			this.L5.Size = new System.Drawing.Size(111, 22);
 			this.L5.Text = "レベル5";
 			// 
 			// L6
 			// 
 			this.L6.Name = "L6";
-			this.L6.Size = new System.Drawing.Size(152, 22);
+			this.L6.Size = new System.Drawing.Size(111, 22);
 			this.L6.Text = "レベル6";
 			// 
 			// allErase
 			// 
 			this.allErase.Name = "allErase";
-			this.allErase.Size = new System.Drawing.Size(152, 22);
+			this.allErase.Size = new System.Drawing.Size(126, 22);
 			this.allErase.Text = "全消し(&A)";
 			// 
 			// drawArea
 			// 
 			this.drawArea.BackColor = System.Drawing.Color.White;
-			this.drawArea.Location = new System.Drawing.Point(2, 28);
+			this.drawArea.Location = new System.Drawing.Point(2, 24);
 			this.drawArea.Name = "drawArea";
-			this.drawArea.Size = new System.Drawing.Size(480, 430);
+			this.drawArea.Size = new System.Drawing.Size(480, 433);
 			this.drawArea.TabIndex = 1;
 			this.drawArea.TabStop = false;
 			this.drawArea.MouseDown += new System.Windows.Forms.MouseEventHandler(this.drawArea_MouseDown);
@@ -230,6 +230,7 @@
 			this.statusStrip1.Location = new System.Drawing.Point(0, 458);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.Size = new System.Drawing.Size(484, 22);
+			this.statusStrip1.SizingGrip = false;
 			this.statusStrip1.TabIndex = 2;
 			this.statusStrip1.Text = "statusStrip1";
 			// 
@@ -248,9 +249,10 @@
 			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.drawArea);
 			this.Controls.Add(this.menuStrip1);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "DrawSharp";
-			this.Text = "SymmetrySharp";
+			this.Text = "DrawSharp";
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.drawArea)).EndInit();
