@@ -43,7 +43,7 @@ namespace DrawSharp
 		/// <summary>
 		/// 描画する線・図形の太さを選択します。
 		/// </summary>
-		private float _SelectStroke { get; set; }
+		private PencilStrokes _SelectStroke { get; set; }
 
 		#endregion
 
@@ -99,70 +99,49 @@ namespace DrawSharp
 				}
 			};
 
-			// 描画ツール指定：ペンモード
-			pencil.Click += (s, e) =>
+			// ツール設定
+			Action<DrawTypes> setTools = (types) =>
 			{
-				_CurrentTool = DrawTypes.Pencil;
+				_CurrentTool = types;
 				status.Text = $"{_CurrentTool} を描画ツールとして設定しました。";
 			};
+
+			// 描画ツール指定：ペンモード
+			pencil.Click += (s, e) => setTools(DrawTypes.Pencil);
 
 			// 描画ツール指定：消しゴムモード
-			eraser.Click += (s, e) =>
-			{
-				_CurrentTool = DrawTypes.Eraser;
-				status.Text = $"{_CurrentTool} を描画ツールとして設定しました。";
-			};
+			eraser.Click += (s, e) => setTools(DrawTypes.Eraser);
 
 			// 描画ツール指定：塗りつぶしモード
-			fill.Click += (s, e) =>
-			{
-				_CurrentTool = DrawTypes.Fill;
-				status.Text = $"{_CurrentTool} を描画ツールとして設定しました。";
-			};
+			fill.Click += (s, e) => setTools(DrawTypes.Fill);
 
 			// 描画ツール指定：楕円モード
-			circle.Click += (s, e) =>
-			{
-				_CurrentTool = DrawTypes.Circle;
-				status.Text = $"{_CurrentTool} を描画ツールとして設定しました。";
-			};
+			circle.Click += (s, e) => setTools(DrawTypes.Circle);
 
 			// 描画ツール指定：四角形モード
-			rect.Click += (s, e) =>
-			{
-				_CurrentTool = DrawTypes.Rect;
-				status.Text = $"{_CurrentTool} を描画ツールとして設定しました。";
-			};
+			rect.Click += (s, e) => setTools(DrawTypes.Rect);
 
 			// 描画ツール指定：なし
-			none.Click += (s, e) =>
-			{
-				_CurrentTool = DrawTypes.None;
-				status.Text = $"{_CurrentTool} を描画ツールとして設定しました。";
-			};
+			none.Click += (s, e) => setTools(DrawTypes.None);
 
 			// 描画する線・図形：線の太さを指定
-			L1.Click += (s, e) =>
-				_SelectStroke = new PencilStrokes("L1").ReturnPencilStroke();
-			L2.Click += (s, e) =>
-				_SelectStroke = new PencilStrokes("L2").ReturnPencilStroke();
-			L3.Click += (s, e) =>
-				_SelectStroke = new PencilStrokes("L3").ReturnPencilStroke();
-			L4.Click += (s, e) =>
-				_SelectStroke = new PencilStrokes("L4").ReturnPencilStroke();
-			L5.Click += (s, e) =>
-				_SelectStroke = new PencilStrokes("L5").ReturnPencilStroke();
-			L6.Click += (s, e) =>
-				_SelectStroke = new PencilStrokes("L6").ReturnPencilStroke();
+			L1.Click += (s, e) => _SelectStroke = PencilStrokes.S1;
+			L2.Click += (s, e) => _SelectStroke = PencilStrokes.S2;
+			L3.Click += (s, e) => _SelectStroke = PencilStrokes.S3;
+			L4.Click += (s, e) => _SelectStroke = PencilStrokes.S4;
+			L5.Click += (s, e) => _SelectStroke = PencilStrokes.S5;
+			L6.Click += (s, e) => _SelectStroke = PencilStrokes.S6;
 
 			// 全消し
 			allErase.Click += (s, e) =>
 			{
 				using (var back = Graphics.FromImage(drawArea.BackgroundImage))
 				{
+					back.Clear(Color.White);
+
 					var front = drawArea.CreateGraphics();
 					front.CompositingMode = CompositingMode.SourceCopy;
-					front.FillRectangle(Brushes.White, _GenerateRectangle(new Point(drawArea.Width), new Point(drawArea.Height)));
+					front.Clear(Color.White);
 				}
 			};
 		}
@@ -179,25 +158,24 @@ namespace DrawSharp
 
 		private void drawArea_MouseUp(object sender, MouseEventArgs e)
 		{
+			var front = drawArea.CreateGraphics();
+			front.CompositingMode = CompositingMode.SourceCopy;
+
 			using (var back = Graphics.FromImage(drawArea.BackgroundImage))
 			{
 				var rect = _GenerateRectangle(_Position, e.Location);
-				switch (_CurrentTool)
-				{
-					case DrawTypes.Fill:
-						back.FillRectangle(new SolidBrush(_CurrentColor), rect);
-						break;
 
-					case DrawTypes.Circle:
-						back.DrawEllipse(new Pen(_CurrentColor, _SelectStroke), rect);
-						break;
+				if (_CurrentTool == DrawTypes.Fill)
+					back.FillRectangle(new SolidBrush(_CurrentColor), rect);
 
-					case DrawTypes.Rect:
-						back.DrawRectangle(new Pen(_CurrentColor), rect);
-						break;
-				}
+				if (_CurrentTool == DrawTypes.Circle)
+					back.DrawEllipse(new Pen(_CurrentColor, (float)_SelectStroke), rect);
+
+				if (_CurrentTool == DrawTypes.Rect)
+					back.DrawRectangle(new Pen(_CurrentColor), rect);
 			}
 
+			front.Clear(Color.White);
 			drawArea.Invalidate();
 		}
 
@@ -216,13 +194,13 @@ namespace DrawSharp
 				switch (_CurrentTool)
 				{
 					case DrawTypes.Pencil:
-						back.DrawLine(new Pen(_CurrentColor, _SelectStroke), _PrevPosition, e.Location);
-						front.DrawLine(new Pen(_CurrentColor, _SelectStroke), _PrevPosition, e.Location);
+						back.DrawLine(new Pen(_CurrentColor, (float)_SelectStroke), _PrevPosition, e.Location);
+						front.DrawLine(new Pen(_CurrentColor, (float)_SelectStroke), _PrevPosition, e.Location);
 						break;
 
 					case DrawTypes.Eraser:
-						back.DrawLine(new Pen(Color.White, _SelectStroke), _PrevPosition, e.Location);
-						front.DrawLine(new Pen(Color.Pink, _SelectStroke), _PrevPosition, e.Location);
+						back.DrawLine(new Pen(Color.White, (float)_SelectStroke), _PrevPosition, e.Location);
+						front.DrawLine(new Pen(Color.Pink, (float)_SelectStroke), _PrevPosition, e.Location);
 						break;
 
 					case DrawTypes.Fill:
@@ -232,7 +210,6 @@ namespace DrawSharp
 
 					case DrawTypes.Circle:
 						front.DrawRectangle(Pens.White, prevRect);
-						//front.DrawEllipse(new Pen(_CurrentColor, _SelectStroke), rect);
 						break;
 
 					case DrawTypes.Rect:
@@ -246,6 +223,7 @@ namespace DrawSharp
 			}
 
 			_PrevPosition = e.Location;
+			drawArea.Invalidate();
 		}
 
 		#endregion
